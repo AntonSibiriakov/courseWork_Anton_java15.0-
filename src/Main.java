@@ -87,24 +87,25 @@ public class Main {
     }
 
 
-    public static String minSalary(Employee[] base) {
+    public static int minSalary(Employee[] base) {
 
         int minSalary = base[0].getSalary();
         int id = 0;
 
         for (int i = 0; i < base.length; i++) {
             int actual = base[i].getSalary();
-            if (actual  <= minSalary) {
-                minSalary =actual;
+            if (actual <= minSalary) {
+                minSalary = actual;
                 id = i;
             }
         }
-        return base[id].toString();
+        return base[id].getSalary();
 
     }
 
 
-    public static String maxSalary(Employee[] base) {
+    public static int maxSalary(Employee[] base) {
+
         int id = 0;
         int max = 0;
         for (int i = 0; i < base.length; i++) {
@@ -115,7 +116,7 @@ public class Main {
 
             }
         }
-        return base[id].toString();
+        return base[id].getSalary();
     }
     public static void listEmployee(Employee[] base) {
 

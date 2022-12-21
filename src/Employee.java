@@ -10,7 +10,7 @@ public class Employee {
         this.fullName = fullName;
         this.department = department;
         this.salary = salary;
-        keyCounter++;// инкремент счетчика
+        id = keyCounter++;// инкремент счетчика
     }
     public int getId(){
         return id;
