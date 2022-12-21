@@ -14,12 +14,11 @@ public class Main {
         base[9] = new Employee("Ракова Софья Максимовна    ", 1, 21000);
 
 
-        table();
+
         fullListEmployee(base);//1. Получить список всех сотрудников.
 
         totalSalary(base);//2. Посчитать сумму затрат на зарплаты.
 
-        table();
         System.out.println(minSalary(base));//3.Найти сотрудника с минимальной заплатой
 
         System.out.println(maxSalary(base));//4/Найти сотрудника с максимальной зарплатой.
@@ -28,57 +27,131 @@ public class Main {
         System.out.println(i);
 
         listEmployee(base);//Получить Ф. И. О. всех сотрудников (вывести в консоль).
+
+
+        System.out.println( "=======Повышенная сложность========\n");
+
+        salaryIndexation(base, 10);//  1. Проиндексировать зарплату
+
+
+        Employee[] oneDep = baseOneDep(base, 1);// Получение массива Employee[] с сотрудниками указанного отдела
+
+
+        System.out.println("\nМинимальна ЗП "+minSalary(oneDep));
+        System.out.println("\nМаксимальная ЗП "+ maxSalary(oneDep));
+        System.out.println("\nЗП отдела "+totalSalary(oneDep));
+        System.out.println("\nСредняя ЗП "+ totalSalary(oneDep)/ oneDep.length);
+        salaryIndexation(oneDep, 10);
+        for (int j = 0; j < oneDep.length; j++) {
+            System.out.println(oneDep[j].getId()+" "+oneDep[j].getFullName()+" "+oneDep[j].getSalary());
+        }
+        sortedLowSalary(base, 23000);
+
+        sortedHighSalary(base,23000 );
+
+
     }
 
-    public static void table() {
-        System.out.println("id        Ф.И.О                Отдел Зарплата ");
-    }
+    public static Employee[] baseOneDep(Employee[] base, int dep) {
+        int k = 0;
+        for (int i = 0; i < base.length; i++) {
+            if (base[i].getDepartment() == 1){
+                k++;
+            }
+        }
+        Employee[] oneDep= new Employee[k];
+        int h = 0;
+        for (int j = 0; j < base.length ;j++ ) {
+            if (base[j].getDepartment()  == dep) {
+                oneDep[h] = new Employee(base[j].getFullName(), dep, base[j].getSalary());
+                oneDep[h].setId(h);
+                h++;
+            }
+        }
+    return  oneDep;}
 
-    public static void fullListEmployee(Employee[] base) {//Цикл проходит по гетерам всех имен и печатает
 
+
+    public static void fullListEmployee(Employee[] base) {
         for (int i = 0; i < 10; i++) {
             String str = base[i].toString();
             System.out.println(str);
         }
     }
-    public static int totalSalary(Employee[] base) {//Цикл проходит по гетерам всех зарплат и складывает
+    public static int totalSalary(Employee[] base) {
      int salary = 0;
         for (int i = 0; i < base.length; i++) {
             salary += base[i].getSalary();
         }
             return salary;
     }
-    public static String minSalary(Employee[] base) {//Сотрудник с мин ЗП
-        int min = base[0].getSalary();
+
+
+    public static int minSalary(Employee[] base) {
+
+        int minSalary = base[0].getSalary();
         int id = 0;
+
         for (int i = 0; i < base.length; i++) {
-            int aktual = base[i].getSalary();
-            if (aktual < min) {
-                min= aktual;
+            int actual = base[i].getSalary();
+            if (actual <= minSalary) {
+                minSalary = actual;
                 id = i;
             }
         }
-        return base[id].toString();
+        return base[id].getSalary();
+
     }
-    public static String maxSalary(Employee[] base) {
+
+
+    public static int maxSalary(Employee[] base) {
+
         int id = 0;
-        int maxSalary = 0;
+        int max = 0;
         for (int i = 0; i < base.length; i++) {
-            int aktual = base[i].getSalary();
-            if (aktual > maxSalary) {
-                maxSalary=aktual;
+            int actual = base[i].getSalary();
+            if (actual > max) {
                 id = i;
+                max = actual;
+
             }
         }
-        return base[id].toString();
+        return base[id].getSalary();
     }
-    public static void listEmployee(Employee[] base) {//Цикл проходит по гетерам всех имен и печатает
+    public static void listEmployee(Employee[] base) {
 
         for (int i = 0; i < 10; i++) {
             String str = base[i].getFullName();
             System.out.println(str);
 
         }
+    }
+
+    public static void salaryIndexation(Employee[]base, int  indx) {
+        for (int i = 0; i < base.length ; i++) {
+            int salary = base[i].getSalary() + base[i].getSalary() * indx / 100;
+
+
+        }
+    }
+
+    public static void sortedLowSalary(Employee[] base, int dividing) {
+        System.out.println("\nСотрудники с ЗП ниже "+dividing);
+        for (int i = 0; i < base.length; i++) {
+            if (base[i].getSalary()<=dividing) {
+                System.out.println(base[i].getId()+" "+ base[i].getFullName()+" "+base[i].getSalary());
+            }
+        }
+    }
+
+    public static void sortedHighSalary(Employee[] base, int dividing) {
+        System.out.println("\nСотрудники с ЗП выше "+dividing);
+        for (int i = 0; i < base.length; i++) {
+            if (base[i].getSalary()>dividing) {
+                System.out.println(base[i].getId()+" "+ base[i].getFullName()+" "+base[i].getSalary());
+            }
+        }
+
     }
 
 }

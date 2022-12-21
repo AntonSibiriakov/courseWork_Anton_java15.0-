@@ -1,6 +1,6 @@
 public class Employee {
     public static int keyCounter;// 2. переменная счетчик
-    private int id = keyCounter;// 3.
+    private int id = keyCounter;
     private String fullName;
 
     private int department;
@@ -10,13 +10,21 @@ public class Employee {
         this.fullName = fullName;
         this.department = department;
         this.salary = salary;
-        keyCounter++;// инкремент счетчика
+        id = keyCounter++;// инкремент счетчика
     }
     public int getId(){
         return id;
     }
+    public void setId (int id) {
+        this.id = id;
+
+    }
     public String getFullName(){
         return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
     public  int getDepartment(){
         return department;
@@ -26,9 +34,9 @@ public class Employee {
     }
 
     public String toString() {
-        String a = id+" "+fullName+"  "+department+" "+salary;
 
-        return a;
+
+        return id+" "+fullName+"  "+department+" "+salary;
     }
 
 
